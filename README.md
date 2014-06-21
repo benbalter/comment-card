@@ -28,3 +28,12 @@ You can also configure Comment Card to allow pseudonymous submissions that don't
 ![guest login](https://cloud.githubusercontent.com/assets/282759/3349921/a8bc334c-f982-11e3-9b1b-7e691a2216b6.png)
 
 Users then will have the choice to enter their name or authenticate with GitHub before submitting. Note: If publicly accessible, this may allow for spam or abusive comments.
+
+## Roadmap
+
+Take a look at the [1.0 Milestone](https://github.com/benbalter/comment-card/issues?milestone=2&state=open)
+
+## Running locally
+
+1. `script/bootstrap`
+2. `script/server`
