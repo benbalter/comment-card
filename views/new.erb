@@ -1,0 +1,38 @@
+<h1>Comment on <a href="https://github.com/<%= owner %>/<%= repo %>"><%= owner %>/<%= repo %></a></h1>
+<div class="row">
+  <div class="col-md-12">
+    <form method="POST" role="form">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" class="form-control" placeholder="A brief description of your comment" />
+      </div>
+      <div class="form-group">
+        <label for="body">Comment</label>
+        <textarea name="body" class="form-control" style="height: 300px; "></textarea>
+      </div>
+      <% if guest_submissions_enabled %>
+        <div class="row">
+          <div class="col-sm-4 guest">
+            <div class="form-group">
+              <input type="text" id="name" name="name" class="form-control" placeholder="Your name" />
+              <button type="submit" class="btn btn-default" name="type" value="guest">Submit as a Guest</button>
+            </div>
+          </div>
+          <div class="col-sm-8">
+            <div class="pick-me">
+              ...or <button class="btn btn-primary" type="submit" name="type" value="github">
+                <% if user %>
+                  submit as @<%= user.login %>
+                <% else %>
+                  log in with GitHub
+                <% end %>
+              </button> to comment and recieve updates
+            </div>
+          </div>
+        </div>
+      <% else %>
+        <button type="submit" class="btn btn-primary" name="type" value="github">Submit</button>
+      <% end %>
+    </form>
+  </div>
+</div>
