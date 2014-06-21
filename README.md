@@ -2,7 +2,7 @@
 
 *Comment card provides a simplified interface for both authenticated and anonymous non-technical users to provide feedback for your GitHub-hosted project*
 
-**[Live Demo](#)**
+**[Live Demo](https://comment-card.herokuapp.com/benbalter/comment-card/issues/new)**
 
 ![comment card](https://cloud.githubusercontent.com/assets/282759/3349920/a7283a1c-f982-11e3-8a92-5fa7c291bf44.png)
 
