@@ -4,6 +4,8 @@
 
 **[Live Demo](#)**
 
+![comment card](https://cloud.githubusercontent.com/assets/282759/3349920/a7283a1c-f982-11e3-8a92-5fa7c291bf44.png)
+
 ## Setup
 
 Comment card is designed to run on Heroku, but can run in any Ruby environment.
@@ -22,5 +24,7 @@ You can also configure Comment Card to allow pseudonymous submissions that don't
 1. Create a "bot" account (a dummy GitHub user that can be used to create the issues)
 2. Login as that user and [create a personal access token](https://github.com/settings/tokens/new) with `public_repo` scope
 3. Set the token as the `GITHUB_TOKEN` environmental variable
+
+![guest login](https://cloud.githubusercontent.com/assets/282759/3349921/a8bc334c-f982-11e3-9b1b-7e691a2216b6.png)
 
 Users then will have the choice to enter their name or authenticate with GitHub before submitting. Note: If publicly accessible, this may allow for spam or abusive comments.
