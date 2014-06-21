@@ -7,3 +7,4 @@ gem "octokit"
 gem "dotenv"
 gem "rack-ssl-enforcer"
 gem "sinatra_auth_github"
+gem 'rack-recaptcha'

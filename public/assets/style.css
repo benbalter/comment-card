@@ -3,8 +3,12 @@ body {font-size: 2em;  margin-top: 25px;}
 footer { position: absolute; bottom: 15px; right: 15px; }
 
 .new .pick-me {text-align:center; margin-top:25px; font-size: 1.5em;}
+.new .recaptcha .pick-me { margin-top: 85px; }
 .new .guest { margin-top: 25px; }
+.new .guest #recaptcha_area { margin-top: 10px; margin-left: auto; margin-right: auto; }
 .new .guest button { display: block; margin-left: auto; margin-right: auto; margin-top: 25px; }
+.new .recaptcha .guest button { margin-top: 10px; }
+.new .recaptcha .recaptcha-invalid { text-align: center; color: red; font-size: .8em; margin-top: 10px; }
 .confirmation { text-align: center; }
 .confirmation .lead { margin-top: 25px; }
 .confirmation .uno-mas { margin-top: 25px; font-size: .9em; }

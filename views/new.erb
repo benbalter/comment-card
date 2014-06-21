@@ -4,17 +4,21 @@
     <form method="POST" role="form">
       <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" id="title" name="title" class="form-control" placeholder="A brief description of your comment" />
+        <input type="text" id="title" name="title" value="<%= title %>" class="form-control" placeholder="A brief description of your comment" />
       </div>
       <div class="form-group">
         <label for="body">Comment</label>
-        <textarea name="body" class="form-control" style="height: 300px; "></textarea>
+        <textarea name="body" class="form-control" style="height: 300px; "><%= body %></textarea>
       </div>
       <% if guest_submissions_enabled %>
-        <div class="row">
+        <div class="row <% if recaptcha_enabled %>recaptcha<% end %>">
           <div class="col-sm-4 guest">
             <div class="form-group">
-              <input type="text" id="name" name="name" class="form-control" placeholder="Your name" />
+              <input type="text" id="name" name="name" class="form-control" value="<%= name %>" placeholder="Your name" />
+              <% if recaptcha_invalid %>
+                <p class="recaptcha-invalid">Text did not match</p>
+              <% end %>
+              <%= recaptcha_tag(:challenge, :display => { :theme => "white" }) if recaptcha_enabled %>
               <button type="submit" class="btn btn-default" name="type" value="guest">Submit as a Guest</button>
             </div>
           </div>

@@ -27,7 +27,14 @@ You can also configure Comment Card to allow pseudonymous submissions that don't
 
 ![guest login](https://cloud.githubusercontent.com/assets/282759/3349921/a8bc334c-f982-11e3-9b1b-7e691a2216b6.png)
 
-Users then will have the choice to enter their name or authenticate with GitHub before submitting. Note: If publicly accessible, this may allow for spam or abusive comments.
+Users then will have the choice to enter their name or authenticate with GitHub before submitting.
+
+## Setting up Recaptcha
+
+If you allow pseudonymous submissions, best practices suggest that you should require users to verify that they are human to avoid spammy submissions. To enable recaptcha support:
+
+1. Get [a recaptcha API Key](https://www.google.com/recaptcha/admin#createsite)
+2. Set `RECAPTCHA_PUBLIC` and `RECAPTCHA_PRIVATE` environmental variables
 
 ## Roadmap
 

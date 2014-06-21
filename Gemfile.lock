@@ -8,6 +8,7 @@ GEM
     dotenv-deployment (0.0.2)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    json (1.8.1)
     multi_json (1.10.1)
     multipart-post (2.0.0)
     octokit (3.1.2)
@@ -15,6 +16,8 @@ GEM
     rack (1.5.2)
     rack-protection (1.5.3)
       rack
+    rack-recaptcha (0.6.6)
+      json
     rack-ssl-enforcer (0.2.7)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -48,6 +51,7 @@ PLATFORMS
 DEPENDENCIES
   dotenv
   octokit
+  rack-recaptcha
   rack-ssl-enforcer
   sinatra
   sinatra-contrib

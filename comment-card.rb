@@ -4,6 +4,7 @@ require 'sinatra_auth_github'
 require 'dotenv'
 require 'securerandom'
 require 'json'
+require 'rack/recaptcha'
 
 Dotenv.load
 
@@ -30,6 +31,11 @@ module CommentCard
       use Rack::SslEnforcer
     end
 
+    if ENV["RECAPTCHA_PUBLIC"] && ENV["RECAPTCHA_PRIVATE"]
+      use Rack::Recaptcha, :public_key => ENV["RECAPTCHA_PUBLIC"], :private_key => ENV["RECAPTCHA_PRIVATE"]
+      helpers Rack::Recaptcha::Helpers
+    end
+
     def user
       env['warden'].user unless env['warden'].nil?
     end
@@ -40,6 +46,10 @@ module CommentCard
 
     def guest_submissions_enabled?
       !guest_token.nil?
+    end
+
+    def recaptcha_enabled?
+      ENV["RECAPTCHA_PUBLIC"] && ENV["RECAPTCHA_PRIVATE"]
     end
 
     def token
@@ -77,6 +87,27 @@ module CommentCard
       client.create_issue "#{owner}/#{repo}", title, body
     end
 
+    def new_issue_view(recaptcha_invalid=false)
+      render_template :new, {
+        :owner                     => params['owner'],
+        :repo                      => params["repo"],
+        :guest_submissions_enabled => guest_submissions_enabled?,
+        :recaptcha_enabled         => recaptcha_enabled?,
+        :recaptcha_invalid         => recaptcha_invalid,
+        :title                     => params["title"],
+        :body                      => params["body"],
+        :name                      => params["name"]
+      }
+    end
+
+    def confirmation_view(issue)
+      render_template :confirmation, {
+        :owner => params[:owner],
+        :repo  => params[:repo],
+        :issue => issue
+      }
+    end
+
     get '/:owner/:repo/issues/new' do
       if cached_comment #post oauth redirect back to GET route, submit commment
         begin
@@ -89,17 +120,9 @@ module CommentCard
         ensure
           uncache_comment
         end
-        render_template :confirmation, {
-          :owner => params[:owner],
-          :repo  => params[:repo],
-          :issue => issue
-        }
+        confirmation_view(issue)
       end
-      render_template :new, {
-        :owner                     => params['owner'],
-        :repo                      => params["repo"],
-        :guest_submissions_enabled => guest_submissions_enabled?
-      }
+      new_issue_view
     end
 
     post '/:owner/:repo/issues/new' do
@@ -112,12 +135,9 @@ module CommentCard
         })
         authenticate!
       elsif params["type"] == "guest" && guest_submissions_enabled?
+        new_issue_view(true) if recaptcha_enabled? && !recaptcha_valid?
         issue = create_issue params["owner"], params["repo"], params["title"], params["body"], params["name"]
-        render_template :confirmation, {
-          :owner => params[:owner],
-          :repo  => params[:repo],
-          :issue => issue
-        }
+        confirmation_view(issue)
       end
     end
   end
