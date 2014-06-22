@@ -1,6 +1,6 @@
 # Comment Card
 
-*Comment card provides a simplified interface for non-technical users — both authenticated and pseudonymous — to provide feedback for your GitHub-hosted project*
+*Comment card provides a simplified interface for non-technical users — both authenticated and pseudonymous — to provide feedback for your GitHub-hosted project (in the form of GitHub issues)*
 
 **[Live Demo](https://comment-card.herokuapp.com/benbalter/comment-card/issues/new)**
 
