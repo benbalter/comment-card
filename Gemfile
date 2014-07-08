@@ -1,5 +1,6 @@
 source "https://rubygems.org"
-ruby "2.1.0"
+ruby "2.1.2"
+#ruby-gemset=comment_card
 
 gem "sinatra"
 gem "octokit"
