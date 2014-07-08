@@ -116,6 +116,10 @@ module CommentCard
       }
     end
 
+    get '/' do
+      redirect to sprintf('%s/%s/issues/new', @@conf['owner'], @@conf['repo'])
+    end
+
     get '/:owner/:repo/issues/new' do
       if cached_comment #post oauth redirect back to GET route, submit commment
         begin
