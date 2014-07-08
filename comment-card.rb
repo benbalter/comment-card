@@ -5,6 +5,7 @@ require 'dotenv'
 require 'securerandom'
 require 'json'
 require 'rack/recaptcha'
+require 'yaml'
 
 Dotenv.load
 
@@ -31,6 +32,8 @@ module CommentCard
       use Rack::SslEnforcer
     end
 
+    @@conf = YAML.load File.open 'config/config.yml'
+
     if ENV["RECAPTCHA_PUBLIC"] && ENV["RECAPTCHA_PRIVATE"]
       use Rack::Recaptcha, :public_key => ENV["RECAPTCHA_PUBLIC"], :private_key => ENV["RECAPTCHA_PRIVATE"]
       helpers Rack::Recaptcha::Helpers
@@ -46,6 +49,10 @@ module CommentCard
 
     def guest_submissions_enabled?
       !guest_token.nil?
+    end
+
+    def logo?
+      @@conf['logo']
     end
 
     def recaptcha_enabled?
@@ -94,6 +101,7 @@ module CommentCard
         :guest_submissions_enabled => guest_submissions_enabled?,
         :recaptcha_enabled         => recaptcha_enabled?,
         :recaptcha_invalid         => recaptcha_invalid,
+        :logo                      => logo?,
         :title                     => params["title"],
         :body                      => params["body"],
         :name                      => params["name"]
