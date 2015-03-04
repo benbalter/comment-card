@@ -14,7 +14,7 @@ module CommentCard
     end
 
     set :github_options, {
-      :scopes => "repo,read:org"
+      :scopes => "public_repo,read:org"
     }
 
     ENV['WARDEN_GITHUB_VERIFIER_SECRET'] ||= SecureRandom.hex
