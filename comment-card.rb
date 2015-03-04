@@ -31,10 +31,6 @@ module CommentCard
       use Rack::SslEnforcer
     end
 
-    def render_template(template, locals)
-      halt erb template, :layout => :layout, :locals => locals.merge({ :template => template })
-    end
-
     get '/:owner/:repo/issues/new' do
       if form_data["title"]  #post oauth redirect back to GET route, submit commment
         repo = "#{form_data["owner"]}/#{form_data["repo"]}"
