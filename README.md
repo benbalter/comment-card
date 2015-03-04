@@ -6,6 +6,10 @@
 
 ![comment card](https://cloud.githubusercontent.com/assets/282759/3349920/a7283a1c-f982-11e3-8a92-5fa7c291bf44.png)
 
+## How it works
+
+Under the hood, Comment Card is just an abstraction layer over a gem called [Problem Child](https://github.com/benbalter/problem_child), which does all the heavy lifting. Problem child allows you to stand up a simple web form to create GitHub issues. If you're only looking to submit issues to a single repository, Problem Child may be the better route.
+
 ## Setup
 
 Comment card is designed to run on Heroku, but can run in any Ruby environment.
