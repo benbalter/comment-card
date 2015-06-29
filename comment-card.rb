@@ -9,9 +9,7 @@ module CommentCard
 
     include ProblemChild::Helpers
 
-    configure do
-      use Rack::Session::Dalli, cache: ProblemChild::Memcache.client
-    end
+    use Rack::Session::Moneta, store: :Redis, url: ENV["REDIS_URL"]
 
     set :github_options, {
       :scopes => "public_repo,read:org"
@@ -19,12 +17,6 @@ module CommentCard
 
     ENV['WARDEN_GITHUB_VERIFIER_SECRET'] ||= SecureRandom.hex
     register Sinatra::Auth::Github
-
-    enable :sessions
-    use Rack::Session::Cookie, {
-      :http_only => true,
-      :secret => ENV['SESSION_SECRET'] || SecureRandom.hex
-    }
 
     configure :production do
       require 'rack-ssl-enforcer'
