@@ -12,3 +12,10 @@ footer { position: absolute; bottom: 15px; right: 15px; }
 .confirmation { text-align: center; }
 .confirmation .lead { margin-top: 25px; }
 .confirmation .uno-mas { margin-top: 25px; font-size: .9em; }
+
+.comment { border: 1px solid #ccc; margin-bottom: 20px; }
+.state { width: 75px; color: white; text-align: center; font-weight: bold; float: right; margin-top: -2em; }
+.state-open { background: green; }
+.state-closed { background: red; }
+.comment .meta { background: #ccc; padding: 5px; }
+.comment .body { padding: 10px; }

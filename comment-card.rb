@@ -31,6 +31,10 @@ module CommentCard
       use Rack::SslEnforcer
     end
 
+    configure do
+      Octokit.auto_paginate = true
+    end
+
     get '/:owner/:repo/issues/new' do
       if form_data["title"]  #post oauth redirect back to GET route, submit commment
         repo = "#{form_data["owner"]}/#{form_data["repo"]}"
@@ -58,6 +62,18 @@ module CommentCard
       session[:form_data] = params.reject { |k,v| ["type", "captures"].include?(k) }.to_json
       authenticate! if params["type"] == "github"
       halt redirect "#{params["owner"]}/#{params["repo"]}/issues/new"
+    end
+
+    get '/:owner/:repo/issues/:issue' do
+      repo = "#{params["owner"]}/#{params["repo"]}"
+      issue = client.issue repo, params["issue"]
+      comments = client.issue_comments repo, params["issue"]
+      render_template :issue, {
+        :owner    => params["owner"],
+        :repo     => params["repo"],
+        :issue    => issue,
+        :comments => comments
+      }
     end
   end
 end
