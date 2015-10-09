@@ -27,14 +27,14 @@
       </div>
 
       <div class="body">
-        <%= issue[:body] %>
+        <%= render_md issue[:body] %>
       </div>
     </div>
   </div>
 </div>
 <% comments.each do |comment| %>
-<div class="row">
-  <div class="col-md-12">
+  <div class="row">
+    <div class="col-md-12">
       <div class="comment">
         <div class="meta">
           <a href="https://github.com/<%= issue[:user][:login] %>">@<%= comment[:user][:login] %></a>
@@ -43,11 +43,9 @@
         </div>
 
         <div class="body">
-          <%= comment[:body] %>
+          <%= render_md comment[:body] %>
         </div>
       </div>
     </div>
   </div>
 <% end %>
-  </div>
-</div>

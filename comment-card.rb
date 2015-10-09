@@ -1,6 +1,8 @@
+require 'html/pipeline'
 require 'problem_child'
 require 'securerandom'
 require 'json'
+require 'uri'
 
 Dotenv.load
 
@@ -33,6 +35,42 @@ module CommentCard
 
     configure do
       Octokit.auto_paginate = true
+    end
+
+    def host
+      @host ||= Addressable::URI.new({
+       :scheme => request.scheme,
+       :host => request.host,
+       :port => (request.port if settings.development?)
+      })
+    end
+
+    def asset_root
+      @asset_root ||= URI.join(host.to_s, "images").to_s
+    end
+
+    def pipeline_context
+      {
+        :gfm => true,
+        :asset_root => asset_root
+      }
+    end
+
+    def pipeline
+      @pipeline ||= HTML::Pipeline.new [
+        HTML::Pipeline::MarkdownFilter,
+        HTML::Pipeline::MentionFilter,
+        HTML::Pipeline::AutolinkFilter,
+        HTML::Pipeline::EmojiFilter,
+        HTML::Pipeline::SyntaxHighlightFilter,
+        HTML::Pipeline::SanitizationFilter
+      ], pipeline_context
+    end
+
+    helpers do
+      def render_md(md)
+        pipeline.call(md)[:output]
+      end
     end
 
     get '/:owner/:repo/issues/new' do
