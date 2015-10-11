@@ -1,0 +1,51 @@
+
+<div class="repo">
+  <a href="https://github.com/<%= owner %>/<%= repo %>">
+    <%= owner %>/<%= repo %>
+  </a>
+</div>
+
+<h1>
+  Comments on <a href="https://github.com/<%= owner %>/<%= repo %>/issues/<%= issue[:number] %>">
+    <%= issue[:title] %>
+  </a>
+</h1>
+
+<div class="state state-<%= issue[:state] %>">
+  <%= issue[:state] %>
+</div>
+
+<h2 class="issue-title">
+
+</h2>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="comment">
+      <div class="meta">
+        Posted by <a href="https://github.com/<%= issue[:user][:login] %>">@<%= issue[:user][:login] %></a> on <%= issue[:created_at] %>
+      </div>
+
+      <div class="body">
+        <%= render_md issue[:body] %>
+      </div>
+    </div>
+  </div>
+</div>
+<% comments.each do |comment| %>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="comment">
+        <div class="meta">
+          <a href="https://github.com/<%= issue[:user][:login] %>">@<%= comment[:user][:login] %></a>
+          commented
+          <a href="<%= comment[:html_url] %>"><%= comment[:created_at] %></a>
+        </div>
+
+        <div class="body">
+          <%= render_md comment[:body] %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
