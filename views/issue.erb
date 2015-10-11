@@ -21,9 +21,14 @@
 
 <div class="row">
   <div class="col-md-12">
-    <div class="comment">
+    <div class="comment" id="issue-<%= issue[:id] %>">
       <div class="meta">
-        Posted by <a href="https://github.com/<%= issue[:user][:login] %>">@<%= issue[:user][:login] %></a> on <%= issue[:created_at] %>
+        <a href="https://github.com/<%= issue[:user][:login] %>">@<%= issue[:user][:login] %></a> posted
+        <a href="#issue-<%= issue[:id] %>">
+          <span class="timestamp" data-timestamp="<%= issue[:created_at].to_i %>">
+            <%= issue[:created_at] %>
+          </span>
+        </a>
       </div>
 
       <div class="body">
@@ -35,11 +40,15 @@
 <% comments.each do |comment| %>
   <div class="row">
     <div class="col-md-12">
-      <div class="comment">
+      <div class="comment" id="issue-comment<%= comment[:id] %>">
         <div class="meta">
           <a href="https://github.com/<%= issue[:user][:login] %>">@<%= comment[:user][:login] %></a>
           commented
-          <a href="<%= comment[:html_url] %>"><%= comment[:created_at] %></a>
+          <a href="#issue-comment<%= comment[:id] %>">
+            <span class="timestamp" data-timestamp="<%= comment[:created_at].to_i %>">
+              <%= comment[:created_at] %>
+            </span>
+          </a>
         </div>
 
         <div class="body">
