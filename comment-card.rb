@@ -110,7 +110,8 @@ module CommentCard
         :owner    => params["owner"],
         :repo     => params["repo"],
         :issue    => issue,
-        :comments => comments
+        :comments => comments,
+        :host     => host
       }
     end
   end

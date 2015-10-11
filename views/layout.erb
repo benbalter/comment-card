@@ -27,6 +27,16 @@
       </footer>
     </div>
 
-    <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="/vendor/moment/min/moment.min.js"></script>
+    <script>
+      jQuery(function($){
+        $(".timestamp").each(function(el, e){
+          var el = $(e);
+          var timestamp = moment.unix(el.data("timestamp"));
+          el.text(timestamp.fromNow());
+        })
+      })
+    </script>
   </body>
 </html>
