@@ -83,6 +83,10 @@ module CommentCard
           :guest_submissions_enabled => anonymous_submissions?,
           :title                     => params["title"],
           :body                      => params["body"],
+          :expected_behaviour        => params["expected-behaviour"],
+          :actual_behaviour          => params["actual-behaviour"],
+          :reproduction_steps        => params["reproduction-steps"],
+          :environment               => params["environment"],
           :name                      => params["name"]
         }
       end

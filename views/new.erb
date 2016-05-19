@@ -7,6 +7,22 @@
         <input type="text" id="title" name="title" value="<%= title %>" class="form-control" placeholder="A brief description of your comment" />
       </div>
       <div class="form-group">
+        <label for="body">What was the expected behaviour?</label>
+        <textarea name="expected-behaviour" class="form-control" style="height: 300px; "><%= expected_behaviour %></textarea>
+      </div>
+      <div class="form-group">
+        <label for="body">What was the actual behaviour?</label>
+        <textarea name="actual-behaviour" class="form-control" style="height: 300px; "><%= actual_behaviour %></textarea>
+      </div>
+      <div class="form-group">
+        <label for="body">What steps do you take to reproduce the problem?</label>
+        <textarea name="reproduction-steps" class="form-control" style="height: 300px; "><%= reproduction_steps %></textarea>
+      </div>
+      <div class="form-group">
+        <label for="body">What environment are you using? (Browser version, OS, software versions, etc)</label>
+        <textarea name="environment" class="form-control" style="height: 300px; "><%= environment %></textarea>
+      </div>
+      <div class="form-group">
         <label for="body">Comment</label>
         <textarea name="body" class="form-control" style="height: 300px; "><%= body %></textarea>
       </div>
